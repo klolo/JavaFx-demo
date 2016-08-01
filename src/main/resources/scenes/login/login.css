@@ -1,0 +1,20 @@
+.loginButton {
+    -fx-background-radius: 3px;
+    -fx-color: red;
+    -fx-background-color: #474744;
+    -fx-min-height: 20px;
+    -fx-min-widdth: 30px;
+    -fx-font: bold 11pt "Arial";
+}
+
+.header {
+    -fx-background-color: #474744;
+    -fx-min-height: 50px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+}
+
+.headerTitle {
+    -fx-text-fill: whitesmoke;
+    -fx-font-size: 18px;
+}

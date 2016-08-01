@@ -1,0 +1,9 @@
+.startButton {
+    -fx-background-color: transparent;
+}
+
+.startButton:hover {
+    -fx-background-color: lightgrey;
+    -fx-border-color: transparent;
+    -fx-background-radius: 20px;
+}

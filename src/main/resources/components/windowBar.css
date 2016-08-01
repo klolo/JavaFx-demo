@@ -1,0 +1,7 @@
+.exitButton {
+    -fx-background-color: transparent;
+}
+
+.exitButton:hover {
+    -fx-background-color: orangered;
+}

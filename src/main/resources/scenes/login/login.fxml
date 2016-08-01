@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            styleClass="mainWindow" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.lolapp.controller.LoginController">
+
+    <stylesheets>
+        <URL value="@/common/style/common.css"/>
+        <URL value="@/scenes/login/login.css"/>
+    </stylesheets>
+
+    <!-- header -->
+    <top>
+        <fx:include fx:id="toolbar" source="/components/windowBar.fxml"/>
+    </top>
+
+    <!-- Login area -->
+    <center>
+        <GridPane alignment="center" hgap="10" prefHeight="239.0" prefWidth="544.0" vgap="10">
+            <padding>
+                <Insets bottom="10" left="25" right="25" top="25"/>
+            </padding>
+            <children>
+                <Text styleClass="bigFont" text="%login.label" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                      GridPane.rowIndex="0"/>
+
+                <TextField fx:id="loginField" promptText="%login.login.prompt" GridPane.columnIndex="0"
+                           GridPane.rowIndex="1"/>
+
+                <PasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="200.0" promptText="%login.password.prompt"
+                               GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+                <Button id="loginButton" onAction="#login" prefHeight="33.0" prefWidth="204.0" styleClass="loginButton"
+                        text="Login" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+
+            </children>
+            <columnConstraints>
+                <ColumnConstraints maxWidth="173.0" minWidth="173.0" prefWidth="173.0"/>
+                <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints/>
+                <RowConstraints/>
+                <RowConstraints maxHeight="20.0" minHeight="16.0" prefHeight="17.0"/>
+                <RowConstraints maxHeight="44.0" minHeight="40.0" prefHeight="43.0"/>
+            </rowConstraints>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <Label text="Sample JavaFx application"/>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,44 @@
+group 'javaFxDemo'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+
+ext {
+    mainClassName = "com.lolapp.Launcher"
+}
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'com.guigarage:ui-basics:0.7'
+    compile "org.projectlombok:lombok:1.16.10"
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': "$mainClassName"
+    }
+}
+
+task run(dependsOn: ['build'], type: JavaExec) {
+    main = "$mainClassName"
+
+    standardInput = System.in
+}
+
+
+task runApp(type: JavaExec) {
+    workingDir = './build'
+    classpath = sourceSets.main.runtimeClasspath
+    ignoreExitValue = true
+    main =  "$mainClassName"
+}

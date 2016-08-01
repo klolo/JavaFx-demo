@@ -1,0 +1,19 @@
+.incorrectField {
+    -fx-border-color: darkred;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.mainWindow {
+    -fx-border-radius: 5px;
+    -fx-background-radius: 10px;
+    -fx-background-color: red;
+}
+
+.bigFont {
+    -fx-font-size: 18px;
+}
+
+.normalFont {
+    -fx-font-size: 14px;
+}
