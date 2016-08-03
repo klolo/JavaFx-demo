@@ -1,4 +1,4 @@
-package com.lolapp.model;
+package com.word_trainer.model;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

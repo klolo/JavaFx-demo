@@ -1,8 +1,8 @@
-package com.lolapp.model;
+package com.word_trainer.model;
 
-import com.lolapp.dto.Word;
-import com.lolapp.util.LearnEntity;
-import com.lolapp.util.LearnMode;
+import com.word_trainer.dto.Word;
+import com.word_trainer.learn.LearnEntity;
+import com.word_trainer.learn.LearnMode;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -40,11 +40,15 @@ public class LearnModel {
 
     protected List<LearnEntity> learnList = new LinkedList<>();
 
-    protected int WORDS_IN_LEARNING_SET = 20;
+    protected int WORDS_IN_LEARNING_SET = 3;
+
+    protected int WORD_CORRECT_ANSWER_MIN = 2;
 
     protected static Random random = new Random();
 
     protected int wordIndex;
+
+    protected int scoreLeft;
 
     @Setter
     protected LearnMode learnMode;

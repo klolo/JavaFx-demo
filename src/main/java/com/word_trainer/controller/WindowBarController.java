@@ -1,4 +1,4 @@
-package com.lolapp.controller.components;
+package com.word_trainer.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -6,7 +6,9 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WindowBarController {
 
     @FXML
@@ -15,9 +17,6 @@ public class WindowBarController {
     private double initialX = 0;
 
     private double initialY = 0;
-
-    public String applicationState ="stae";
-
 
     private void addDragListeners(final Node n) {
         n.setOnMousePressed(me -> mousePressedProcess(n, me));

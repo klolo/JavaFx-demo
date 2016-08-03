@@ -1,4 +1,4 @@
-package com.lolapp.util;
+package com.word_trainer.learn;
 
 
 public enum LearnMode {

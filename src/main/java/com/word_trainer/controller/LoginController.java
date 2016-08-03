@@ -1,16 +1,18 @@
-package com.lolapp.controller;
+package com.word_trainer.controller;
 
-import com.lolapp.model.LoginModel;
-import com.lolapp.util.StageSwitch;
+import com.word_trainer.model.LoginModel;
+import com.word_trainer.application.StageSwitch;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+@Component
 @Slf4j
 public class LoginController extends LoginModel {
 

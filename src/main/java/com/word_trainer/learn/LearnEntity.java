@@ -1,6 +1,6 @@
-package com.lolapp.util;
+package com.word_trainer.learn;
 
-import com.lolapp.dto.Word;
+import com.word_trainer.dto.Word;
 import lombok.Data;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;

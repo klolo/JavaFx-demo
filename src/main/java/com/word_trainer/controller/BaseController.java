@@ -1,6 +1,6 @@
-package com.lolapp.controller;
+package com.word_trainer.controller;
 
-import com.lolapp.Launcher;
+import com.word_trainer.Launcher;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;

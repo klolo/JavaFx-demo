@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            styleClass="mainWindow" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.word_trainer.controller.LoginController">
+
+    <stylesheets>
+        <URL value="@/common/style/common.css"/>
+        <URL value="@/scenes/login/login.css"/>
+    </stylesheets>
+
+    <!-- header -->
+    <top>
+        <fx:include fx:id="toolbar" source="/components/windowBar.fxml"/>
+    </top>
+
+    <!-- Login area -->
+    <center>
+        <Label text="Error"/>
+    </center>
+
+</BorderPane>

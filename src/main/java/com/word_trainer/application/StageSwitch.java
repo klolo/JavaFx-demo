@@ -1,21 +1,22 @@
-package com.lolapp.util;
+package com.word_trainer.application;
 
-import com.lolapp.Launcher;
-import javafx.fxml.FXMLLoader;
+import com.word_trainer.Launcher;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
+/**
+ * Klasa pomocnicza do zmieniania scen z wykorzystaniem springa.
+ */
 @Slf4j
 public class StageSwitch {
 
     private String scenePathToLoad;
 
-    private FXMLLoader loader = new FXMLLoader();
+    private SpringFxmlLoader loader = new SpringFxmlLoader();
 
     public StageSwitch(final String scenePathToLoad) {
         this.scenePathToLoad = scenePathToLoad;
@@ -23,20 +24,14 @@ public class StageSwitch {
 
     public void load(final Stage node) throws IOException {
         log.info("Change stage to: {}", scenePathToLoad);
-        loader = new FXMLLoader(getClass().getResource(scenePathToLoad));
-        loader.setResources(ResourceBundle.getBundle("common//bundles//messages", new Locale("pl")));
 
         final Scene newScene = new Scene(
-                loader.load(),
+                (Parent) loader.load(scenePathToLoad),
                 Launcher.SCENE_WIDTH,
                 Launcher.SCENE_HEIGHT
         );
 
         node.setScene(newScene);
-    }
-
-    public Object getController() {
-        return loader.getController();
     }
 
 }

@@ -5,7 +5,8 @@ apply plugin: 'java'
 
 
 ext {
-    mainClassName = "com.lolapp.Launcher"
+    mainClassName = "com.word_trainer.Launcher"
+    springVersion = "4.3.2.RELEASE"
 }
 
 sourceCompatibility = 1.8
@@ -15,11 +16,21 @@ repositories {
     mavenCentral()
 }
 
+
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'com.guigarage:ui-basics:0.7'
     compile "org.projectlombok:lombok:1.16.10"
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+
+    // spring
+    compile 'org.springframework:spring-context:4.3.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version: "$springVersion"
+    compile group: 'org.springframework', name: 'spring-beans', version: "$springVersion"
+    compile group: 'org.springframework', name: 'spring-context', version: "$springVersion"
+    compile group: 'org.springframework', name: 'spring-aop', version: "$springVersion"
+    compile group: 'org.springframework', name: 'spring-test', version: "$springVersion"
 }
 
 

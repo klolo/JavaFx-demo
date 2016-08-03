@@ -7,7 +7,6 @@
 .mainWindow {
     -fx-border-radius: 5px;
     -fx-background-radius: 10px;
-    -fx-background-color: red;
 }
 
 .bigFont {
