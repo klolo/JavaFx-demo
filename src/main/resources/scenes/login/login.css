@@ -18,3 +18,11 @@
     -fx-text-fill: whitesmoke;
     -fx-font-size: 18px;
 }
+
+.loginHeader {
+    -fx-background-color: #dff0d8;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cfe0c8;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            styleClass="mainWindow" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.word_trainer.controller.SummaryController">
+
+    <stylesheets>
+        <URL value="@/common/style/common.css"/>
+    </stylesheets>
+
+    <!-- header -->
+    <top>
+        <fx:include fx:id="toolbar" source="/components/windowBar.fxml"/>
+    </top>
+
+    <!-- Login area -->
+    <center>
+        <GridPane alignment="center" hgap="10" minWidth="500" prefHeight="239.0" prefWidth="544.0" vgap="10">
+            <padding>
+                <Insets bottom="10" left="25" right="25" top="25"/>
+            </padding>
+
+            <Label text="Lesson done" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS"
+                   GridPane.rowIndex="0"/>
+
+            <Label fx:id="correctField" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS"
+                   GridPane.rowIndex="1"/>
+
+            <Label fx:id="incorrectField" text="Lesson done" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS"
+                   GridPane.rowIndex="2"/>
+
+            <Label text="Lesson done" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS"
+                   GridPane.rowIndex="3"/>
+
+
+        </GridPane>
+    </center>
+
+    <bottom>
+        <HBox>
+            <children>
+                <Region prefWidth="200.0" HBox.hgrow="ALWAYS"/>
+                <Button mnemonicParsing="false" onAction="#goToDashboard" styleClass="startButton">
+                    <tooltip>
+                        <Tooltip text="Go to menu"/>
+                    </tooltip>
+                    <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/common/images/menu.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+
+        </HBox>
+
+    </bottom>
+
+</BorderPane>

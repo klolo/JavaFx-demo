@@ -74,7 +74,7 @@ public class LearnController extends LearnModel {
         stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
 
-    public void next() {
+    public void next(final ActionEvent event) throws IOException {
         int tryCount = 0;
         while (true) {
             int tmpWordIndex = wordIndex + 1;
@@ -92,6 +92,8 @@ public class LearnController extends LearnModel {
 
             if (tryCount == learnList.size()) {
                 log.info("Learing is done");
+                final StageSwitch stageSwitch = new StageSwitch("/scenes/summary/summary.fxml");
+                stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
                 break;
             }
         }
@@ -101,7 +103,7 @@ public class LearnController extends LearnModel {
 
     private void changeProgress() {
         final double maxScoreLevel = (double) WORDS_IN_LEARNING_SET * (double) WORD_CORRECT_ANSWER_MIN;
-        final double progress = (maxScoreLevel - (double)scoreLeft) / maxScoreLevel;
+        final double progress = (maxScoreLevel - (double) scoreLeft) / maxScoreLevel;
         log.info("Progress: {}, wordsIndex: {}", progress, wordIndex);
         learnProgress.setProgress(progress);
     }
@@ -111,31 +113,31 @@ public class LearnController extends LearnModel {
         setSecondWordLabelOnView();
     }
 
-    private void onRadioEvent() {
+    private void onRadioEvent(final ActionEvent event) throws IOException {
         setRadioVisibility(false);
         currentWordReverse.setVisible(false);
         changeProgress();
-        next();
+        next(event);
     }
 
-    public void onKnowRadioClick() {
+    public void onKnowRadioClick(final ActionEvent event) throws IOException {
         log.info("I know");
         knowRadio.setSelected(false);
         scoreLeft -= 1;
         getCurrentWord().increaseCorrectAnswersAmount();
-        onRadioEvent();
+        onRadioEvent(event);
     }
 
-    public void onNotKnowRadioClick() {
+    public void onNotKnowRadioClick(final ActionEvent event) throws IOException {
         log.info("I do not know");
         notKnowRadio.setSelected(false);
         getCurrentWord().increaseIncorrectAnswersAmount();
-        onRadioEvent();
+        onRadioEvent(event);
     }
 
-    public void onLaterRadioClick() {
+    public void onLaterRadioClick(final ActionEvent event) throws IOException {
         log.info("I need some time");
-        onRadioEvent();
+        onRadioEvent(event);
         laterRadio.setSelected(false);
     }
 

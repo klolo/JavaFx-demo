@@ -45,9 +45,9 @@ public class LearnModel {
 
     protected List<LearnEntity> learnList = new LinkedList<>();
 
-    protected int WORDS_IN_LEARNING_SET = 3;
+    protected int WORDS_IN_LEARNING_SET = 2;
 
-    protected int WORD_CORRECT_ANSWER_MIN = 2;
+    protected int WORD_CORRECT_ANSWER_MIN = 1;
 
     protected static Random random = new Random();
 
