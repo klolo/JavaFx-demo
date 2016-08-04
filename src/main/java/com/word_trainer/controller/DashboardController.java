@@ -9,7 +9,9 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,11 +22,11 @@ import java.io.IOException;
 @Component
 public class DashboardController extends DashboardModel {
 
-
     @FXML
     @SuppressWarnings("unchecked")
     public void initialize() {
-        wordsTableView.setItems(wordsService.getWordsList());
+        wordsList = wordsService.getWordsList();
+        wordsTableView.setItems(wordsList);
 
         actionColumn.setCellValueFactory(a ->
                 new SimpleBooleanProperty(((TableColumn.CellDataFeatures<Word, Boolean>) a).getValue() != null)
@@ -33,13 +35,16 @@ public class DashboardController extends DashboardModel {
         actionColumn.setCellFactory(a -> new ButtonCell(this::deleteItem, "delete"));
     }
 
-    private void deleteItem() {
-        log.info("delete item from list");
+    private void deleteItem(final ActionEvent event) {
+        final int rowIndex = ((TableRow) ((Button) event.getSource()).getParent().getParent()).getIndex();
+        log.info("delete item, event: {}", rowIndex);
+        wordsList.remove(rowIndex);
     }
 
     public void addWord() {
         log.info("add new word: {} - {}", foreignWordField.getText(), meaningField.getText());
-        if (foreignWordField.getText().isEmpty() || meaningField.getText().isEmpty()) {
+        if (foreignWordField.getText().isEmpty() || meaningField.getText().isEmpty() || wordsList.contains(foreignWordField.getText())) {
+            log.warn("cannot add word");
             return;
         }
 
@@ -53,8 +58,11 @@ public class DashboardController extends DashboardModel {
     public void startLearning(final ActionEvent event) throws IOException {
         final StageSwitch stageSwitch = new StageSwitch("/scenes/learn/learn.fxml");
         stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
-        learnController.setWordsList(wordsService.getWordsList());
-        learnController.setLearnMode(LearnMode.FIRST_MEANING);
+        learnController.setWordsList(wordsList);
+
+        final LearnMode selectedLearnMode =
+                learningModeChoice.getSelectionModel().getSelectedIndex() == 0 ? LearnMode.FIRST_FOREIGN : LearnMode.FIRST_MEANING;
+        learnController.setLearnMode(selectedLearnMode);
         learnController.init();
     }
 

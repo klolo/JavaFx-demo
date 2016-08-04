@@ -1,8 +1,10 @@
 package com.word_trainer.model;
 
+import com.word_trainer.services.AuthorizationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.function.Predicate;
 
@@ -12,17 +14,13 @@ import java.util.function.Predicate;
 @Data
 public class LoginModel {
 
+    @Autowired
+    protected AuthorizationService authorizationService;
+
     @FXML
     protected TextField loginField;
 
     @FXML
     protected TextField passwordField;
-
-    protected static final int MIN_LOGIN_LENGTH = 3;
-
-    protected static final int MAX_LOGIN_LENGTH = 20;
-
-    protected Predicate<TextField> fieldCorrectPredicate =
-            f -> f.getText() != null && f.getText().length() > MIN_LOGIN_LENGTH && f.getText().length() < MAX_LOGIN_LENGTH;
 
 }

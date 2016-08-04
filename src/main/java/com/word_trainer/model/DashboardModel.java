@@ -6,10 +6,7 @@ import com.word_trainer.services.WordsService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -32,5 +29,10 @@ public abstract class DashboardModel {
 
     @FXML
     protected TableColumn actionColumn;
+
+    @FXML
+    protected ChoiceBox learningModeChoice;
+
+    protected ObservableList<Word> wordsList;
 
 }

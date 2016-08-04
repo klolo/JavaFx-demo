@@ -3,44 +3,46 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lolapp.controller.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0"
+            prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.DashboardController">
 
     <stylesheets>
-        <URL value="@/common/style/common.css" />
-        <URL value="@/scenes/dashboard/dashboard.css" />
+        <URL value="@/common/style/common.css"/>
+        <URL value="@/scenes/dashboard/dashboard.css"/>
     </stylesheets>
 
     <!-- header -->
     <top>
-        <fx:include fx:id="toolbar" source="../../components/windowBar.fxml" />
+        <fx:include fx:id="toolbar" source="../../components/windowBar.fxml"/>
     </top>
 
     <center>
-        <VBox prefHeight="448.0" prefWidth="757.0">
+        <VBox prefHeight="448.0" prefWidth="757.0" BorderPane.alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
             <padding>
-                <Insets bottom="10" left="25" right="25" top="25" />
+                <Insets bottom="10" left="25" right="25" top="25"/>
             </padding>
             <children>
                 <HBox prefHeight="36.0" prefWidth="408.0" spacing="10">
                     <children>
-                        <Label alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="102.0" text="Add new word: " />
-                        <TextField fx:id="foreignWordField" promptText="foreign word" />
-                        <TextField fx:id="meaningField" promptText="meaning" />
+                        <Label alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="102.0" text="Add new word: "/>
+                        <TextField fx:id="foreignWordField" promptText="foreign word"/>
+                        <TextField fx:id="meaningField" promptText="meaning"/>
 
                         <Button mnemonicParsing="false" onAction="#addWord" styleClass="startButton">
                             <tooltip>
-                                <Tooltip text="Close application" />
+                                <Tooltip text="Close application"/>
                             </tooltip>
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="/common/images/add.png" />
+                                        <Image url="/common/images/add.png"/>
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -51,31 +53,36 @@
 
                 <HBox spacing="10">
                     <children>
-                        <TableView fx:id="words" prefHeight="378.0" prefWidth="408.0" HBox.hgrow="ALWAYS">
-                            <columns >
+                        <TableView fx:id="wordsTableView" prefHeight="378.0" prefWidth="408.0" HBox.hgrow="ALWAYS">
+                            <columns>
                                 <TableColumn prefWidth="34.0" text="lp">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="id" />
+                                        <PropertyValueFactory property="id"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="foreignWord" maxWidth="Infinity" prefWidth="275.0" text="foreignWord">
+                                <TableColumn fx:id="foreignWord" editable="true" maxWidth="Infinity" prefWidth="225.0"
+                                             text="foreignWord">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="foreignWord" />
+                                        <PropertyValueFactory property="foreignWord"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="265.0" text="meaning">
+                                <TableColumn editable="true" prefWidth="251.0" text="meaning">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="meaning" />
+                                        <PropertyValueFactory property="meaning"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="184.0" text="levelOfFamiliarity">
+                                <TableColumn editable="true" prefWidth="69.0" text="status">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="levelOfFamiliarity" />
+                                        <PropertyValueFactory property="progressIndicator"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn  prefWidth="184.0" text="action">
-
+                                <TableColumn prefWidth="95.0" text="progress">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="percentProgress"/>
+                                    </cellValueFactory>
                                 </TableColumn>
+                                <TableColumn fx:id="actionColumn" prefWidth="141.0" resizable="false" sortable="false"
+                                             text="action"/>
                             </columns>
                         </TableView>
                     </children>
@@ -88,33 +95,33 @@
     <bottom>
         <HBox alignment="CENTER_LEFT">
             <padding>
-                <Insets bottom="10" left="10" right="10" />
+                <Insets bottom="10" left="10" right="10"/>
             </padding>
-           <children>
-               <Label text="Learning mode:" />
-               <ChoiceBox layoutX="396" layoutY="66" maxWidth="23" minWidth="200" prefHeight="24" prefWidth="61" value="First foreign word">
-                   <items>
-                       <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="First foreign word" />
-                           <String fx:value="First meaning" />
-                           <String fx:value="Mix" />
-                       </FXCollections>
-                   </items>
-               </ChoiceBox>
-               <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
-               <Button mnemonicParsing="false" onAction="#startLearning" styleClass="startButton">
-                   <tooltip>
-                       <Tooltip text="Close application" />
-                   </tooltip>
-                   <graphic>
-                       <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                               <Image url="/common/images/start.png" />
-                           </image>
-                       </ImageView>
-                   </graphic>
-               </Button>
-           </children>
+            <children>
+                <Label prefHeight="16.0" prefWidth="116.0" text="Learning mode:"/>
+                <ChoiceBox fx:id="learningModeChoice" layoutX="396" layoutY="66" maxWidth="23" minWidth="200"
+                           prefHeight="24" prefWidth="61" value="First meaning">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="First foreign word"/>
+                            <String fx:value="First meaning"/>
+                        </FXCollections>
+                    </items>
+                </ChoiceBox>
+                <Region prefWidth="200.0" HBox.hgrow="ALWAYS"/>
+                <Button mnemonicParsing="false" onAction="#startLearning" styleClass="startButton">
+                    <tooltip>
+                        <Tooltip text="Close application"/>
+                    </tooltip>
+                    <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="/common/images/start.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
         </HBox>
 
     </bottom>

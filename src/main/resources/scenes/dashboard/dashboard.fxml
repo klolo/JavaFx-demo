@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.collections.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.cell.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
-
-<?import javafx.util.Callback?>
-<?import javafx.beans.Observable?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0"
             prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.DashboardController">
@@ -33,7 +24,7 @@
     </top>
 
     <center>
-        <VBox prefHeight="448.0" prefWidth="757.0">
+        <VBox prefHeight="448.0" prefWidth="757.0" BorderPane.alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
             <padding>
                 <Insets bottom="10" left="25" right="25" top="25"/>
             </padding>
@@ -69,23 +60,29 @@
                                         <PropertyValueFactory property="id"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn fx:id="foreignWord" maxWidth="Infinity" prefWidth="225.0"
+                                <TableColumn fx:id="foreignWord" editable="true" maxWidth="Infinity" prefWidth="225.0"
                                              text="foreignWord">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="foreignWord"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="298.0" text="meaning">
+                                <TableColumn editable="true" prefWidth="251.0" text="meaning">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="meaning"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="99.0" text="progress">
+                                <TableColumn editable="true" prefWidth="69.0" text="status">
                                     <cellValueFactory>
-                                        <PropertyValueFactory property="levelOfFamiliarity"/>
+                                        <PropertyValueFactory property="progressIndicator"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn sortable="false" fx:id="actionColumn" prefWidth="70.0" text="action" />
+                                <TableColumn prefWidth="95.0" text="progress">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="percentProgress"/>
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn fx:id="actionColumn" prefWidth="141.0" resizable="false" sortable="false"
+                                             text="action"/>
                             </columns>
                         </TableView>
                     </children>
@@ -102,13 +99,12 @@
             </padding>
             <children>
                 <Label prefHeight="16.0" prefWidth="116.0" text="Learning mode:"/>
-                <ChoiceBox layoutX="396" layoutY="66" maxWidth="23" minWidth="200" prefHeight="24" prefWidth="61"
-                           value="First foreign word">
+                <ChoiceBox fx:id="learningModeChoice" layoutX="396" layoutY="66" maxWidth="23" minWidth="200"
+                           prefHeight="24" prefWidth="61" value="First meaning">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="First foreign word"/>
                             <String fx:value="First meaning"/>
-                            <String fx:value="Mix"/>
                         </FXCollections>
                     </items>
                 </ChoiceBox>

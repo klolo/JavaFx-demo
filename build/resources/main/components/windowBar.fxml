@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import java.net.URL?>
-<HBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lolapp.controller.components.WindowBarController"
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.WindowBarController"
       fx:id="toolbar" alignment="CENTER_LEFT" styleClass="header" HBox.hgrow="ALWAYS">
 
     <stylesheets>

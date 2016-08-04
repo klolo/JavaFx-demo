@@ -69,6 +69,7 @@ public class LearnController extends LearnModel {
     }
 
     public void goToDashboard(final ActionEvent event) throws IOException {
+        wordsService.saveCurrentWords();
         final StageSwitch stageSwitch = new StageSwitch("/scenes/dashboard/dashboard.fxml");
         stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
     }
@@ -141,4 +142,5 @@ public class LearnController extends LearnModel {
     public static int getRandomInt(int min, int max) {
         return random.nextInt(max - min) + min;
     }
+
 }

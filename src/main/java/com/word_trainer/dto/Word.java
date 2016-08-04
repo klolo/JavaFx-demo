@@ -19,7 +19,21 @@ public class Word {
 
     private int correctAnswers;
 
+    private boolean isInSaveFile = false;
+
+    final static int MINIMAL_CORRECT_ANSWER = 10;
+
     final static float KNOW_LEVEL = 0.90f;
+
+    public String getProgressIndicator() {
+        return correctAnswers + "/" + incorrectAnswers;
+    }
+
+    public String getPercentProgress() {
+        String percentProgress = String.valueOf(levelOfFamiliarity * 100);
+        return percentProgress.substring(0, percentProgress.indexOf(".")) + " %";
+    }
+
 
     public void increaseCorrectAnswersAmount() {
         correctAnswers++;
@@ -31,9 +45,13 @@ public class Word {
         changeLevelOfFamiliarity();
     }
 
-    private void changeLevelOfFamiliarity() {
+    public void changeLevelOfFamiliarity() {
+        if (correctAnswers < MINIMAL_CORRECT_ANSWER) {
+            return;
+        }
+
         if (incorrectAnswers != 0 && correctAnswers != 0) {
-            levelOfFamiliarity = incorrectAnswers / correctAnswers;
+            levelOfFamiliarity = (float) incorrectAnswers / (float) correctAnswers;
         }
 
         if (levelOfFamiliarity > KNOW_LEVEL) {

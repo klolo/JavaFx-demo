@@ -1,83 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0"
-            prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lolapp.controller.LearnController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.LearnController">
 
     <stylesheets>
-        <URL value="@/common/style/common.css"/>
-        <URL value="@/scenes/learn/learn.css"/>
+        <URL value="@/common/style/common.css" />
+        <URL value="@/scenes/learn/learn.css" />
     </stylesheets>
-
-    <!--<fx:define>-->
-    <!--<ToggleGroup fx:id="myToggleGroup"/>-->
-    <!--</fx:define>-->
 
     <!-- header -->
     <top>
-        <fx:include fx:id="toolbar" source="../../components/windowBar.fxml"/>
+        <fx:include fx:id="toolbar" source="../../components/windowBar.fxml" />
     </top>
 
     <center>
-        <GridPane alignment="center" hgap="3" prefHeight="473.0" prefWidth="809.0" styleClass="bigFont" vgap="10"
-                  GridPane.hgrow="ALWAYS">
+        <GridPane alignment="center" hgap="3" styleClass="bigFont" vgap="10" GridPane.hgrow="ALWAYS">
             <padding>
-                <Insets bottom="10" left="25" right="25" top="25"/>
+                <Insets bottom="10" left="25" right="25" top="25" />
             </padding>
             <children>
-                <ProgressBar fx:id="learnProgress" prefHeight="20.0" prefWidth="317.0" progress="0.0"
-                             GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS"
-                             GridPane.rowIndex="0"/>
+                <ProgressBar fx:id="learnProgress" prefHeight="20.0" prefWidth="559.0" progress="0.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
 
-                <Label text="Word:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Label fx:id="currentWord" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Button mnemonicParsing="false" onAction="#show" styleClass="startButton" GridPane.columnIndex="2"
-                        GridPane.rowIndex="1">
+                <Label text="Word:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="currentWord" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button mnemonicParsing="false" onAction="#show" styleClass="startButton" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <tooltip>
-                        <Tooltip text="Close application"/>
+                        <Tooltip text="Close application" />
                     </tooltip>
                     <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="/common/images/restart.png"/>
+                                <Image url="/common/images/restart.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
 
-                <Label fx:id="currentWordReverse" GridPane.columnIndex="0" GridPane.columnSpan="2"
-                       GridPane.rowIndex="2"/>
+                <Label fx:id="currentWordReverse" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
 
-                <RadioButton fx:id="knowRadio" onAction="#onKnowRadioClick"
-                             prefHeight="18.0" prefWidth="85.0" text="I know" toggleGroup="$myToggleGroup"
-                             GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="normalFont"/>
-                <RadioButton fx:id="notKnowRadio" onAction="#onNotKnowRadioClick" prefHeight="18.0" prefWidth="130.0"
-                             text="I do not know" toggleGroup="$myToggleGroup" GridPane.columnIndex="1"
-                             GridPane.rowIndex="3" styleClass="normalFont"/>
-                <RadioButton fx:id="laterRadio" onAction="#onLaterRadioClick" prefHeight="90.0" prefWidth="91.0"
-                             text="Later" toggleGroup="$myToggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="3" styleClass="normalFont"/>
+                <RadioButton fx:id="knowRadio" onAction="#onKnowRadioClick" prefHeight="18.0" prefWidth="85.0" styleClass="normalFont" text="I know" toggleGroup="$myToggleGroup" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <RadioButton fx:id="notKnowRadio" onAction="#onNotKnowRadioClick" prefHeight="18.0" prefWidth="130.0" styleClass="normalFont" text="I do not know" toggleGroup="$myToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <RadioButton fx:id="laterRadio" onAction="#onLaterRadioClick" prefHeight="90.0" prefWidth="91.0" styleClass="normalFont" text="Later" toggleGroup="$myToggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="3" />
 
             </children>
             <columnConstraints>
-                <ColumnConstraints maxWidth="Infinity" minWidth="52.0" prefWidth="85.0"/>
-                <ColumnConstraints maxWidth="Infinity" minWidth="99.0" prefWidth="133.0"/>
-                <ColumnConstraints maxWidth="Infinity" minWidth="78.0" prefWidth="79.0"/>
-                <ColumnConstraints maxWidth="Infinity" minWidth="0.0" prefWidth="0.0"/>
+                <ColumnConstraints maxWidth="Infinity" minWidth="124.0" prefWidth="155.0" />
+                <ColumnConstraints maxWidth="Infinity" minWidth="99.0" prefWidth="264.0" />
+                <ColumnConstraints maxWidth="Infinity" minWidth="78.0" prefWidth="145.0" />
+                <ColumnConstraints maxWidth="Infinity" minWidth="0.0" prefWidth="0.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints/>
-                <RowConstraints/>
-                <RowConstraints maxHeight="45.0" minHeight="22.0" prefHeight="45.0"/>
-                <RowConstraints maxHeight="84.0" minHeight="61.0" prefHeight="61.0"/>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints maxHeight="45.0" minHeight="22.0" prefHeight="45.0" />
+                <RowConstraints maxHeight="84.0" minHeight="61.0" prefHeight="61.0" />
             </rowConstraints>
         </GridPane>
 
@@ -88,26 +68,26 @@
             <children>
                 <Button mnemonicParsing="false" onAction="#goToDashboard" styleClass="startButton">
                     <tooltip>
-                        <Tooltip text="Close application"/>
+                        <Tooltip text="Close application" />
                     </tooltip>
                     <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="/common/images/menu.png"/>
+                                <Image url="/common/images/menu.png" />
                             </image>
                         </ImageView>
                     </graphic>
                 </Button>
 
-                <Region prefWidth="200.0" HBox.hgrow="ALWAYS"/>
+                <Region prefWidth="200.0" HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#next" styleClass="startButton">
                     <tooltip>
-                        <Tooltip text="Close application"/>
+                        <Tooltip text="Close application" />
                     </tooltip>
                     <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="/common/images/start.png"/>
+                                <Image url="/common/images/start.png" />
                             </image>
                         </ImageView>
                     </graphic>

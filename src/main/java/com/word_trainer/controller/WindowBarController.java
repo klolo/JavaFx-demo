@@ -1,15 +1,20 @@
 package com.word_trainer.controller;
 
+import com.word_trainer.services.WordsService;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WindowBarController {
+
+    @Autowired
+    private WordsService wordsService;
 
     @FXML
     private HBox toolbar;
@@ -48,6 +53,7 @@ public class WindowBarController {
     }
 
     public void closeApplication() {
+        wordsService.saveCurrentWords();
         Platform.exit();
     }
 }

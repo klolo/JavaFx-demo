@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 @Component
 @Slf4j
@@ -22,24 +25,27 @@ public class LoginController extends LoginModel {
         passwordField.focusedProperty().addListener((observable, oldValue, newValue) -> validateFieldOnBlur(passwordField, newValue));
     }
 
-    public void login(final ActionEvent event) throws IOException {
-     //   if (fieldCorrectPredicate.test(loginField) && fieldCorrectPredicate.test(passwordField)) {
-            log.info("Login user: {} with password: {}", loginField.getText(), passwordField.getText());
-            final StageSwitch stageSwitch = new StageSwitch("/scenes/dashboard/dashboard.fxml");
-            stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
-      //  }
-    }
-
     private void validateFieldOnBlur(final TextField field, final boolean focused) {
         if (focused) {
             return;
         }
 
-        if (!fieldCorrectPredicate.test(field)) {
+        if (!authorizationService.fieldCorrectPredicate.test(field.getText())) {
             field.getStyleClass().add("incorrectField");
         }
         else {
             field.getStyleClass().remove("incorrectField");
+        }
+    }
+
+    public void login(final ActionEvent event) throws IOException, NoSuchAlgorithmException {
+        if (authorizationService.loginUser(loginField.getText(), passwordField.getText())) {
+            final StageSwitch stageSwitch = new StageSwitch("/scenes/dashboard/dashboard.fxml");
+            stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
+        }
+        else {
+            validateFieldOnBlur(loginField, false);
+            validateFieldOnBlur(passwordField, false);
         }
     }
 
