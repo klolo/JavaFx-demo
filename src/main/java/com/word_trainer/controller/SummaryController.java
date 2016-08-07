@@ -20,7 +20,8 @@ public class SummaryController extends SummaryModel {
 
     @FXML
     public void initialize() {
-
+        correctField.textProperty().setValue("Correct answers: " + learnController.getCorrect());
+        incorrectField.textProperty().setValue("Incorrect answers: " + learnController.getIncorrect());
     }
 
     public void goToDashboard(final ActionEvent event) throws IOException {

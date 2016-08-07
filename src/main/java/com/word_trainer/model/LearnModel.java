@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -52,6 +53,12 @@ public class LearnModel {
     protected static Random random = new Random();
 
     protected int wordIndex;
+
+    @Getter
+    protected int correct;
+
+    @Getter
+    protected int incorrect;
 
     protected int scoreLeft;
 

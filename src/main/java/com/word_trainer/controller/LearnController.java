@@ -126,6 +126,7 @@ public class LearnController extends LearnModel {
         scoreLeft -= 1;
         getCurrentWord().increaseCorrectAnswersAmount();
         onRadioEvent(event);
+        correct++;
     }
 
     public void onNotKnowRadioClick(final ActionEvent event) throws IOException {
@@ -133,6 +134,7 @@ public class LearnController extends LearnModel {
         notKnowRadio.setSelected(false);
         getCurrentWord().increaseIncorrectAnswersAmount();
         onRadioEvent(event);
+        incorrect++;
     }
 
     public void onLaterRadioClick(final ActionEvent event) throws IOException {
