@@ -1,5 +1,6 @@
 package com.word_trainer.model;
 
+import com.word_trainer.repository.UserRepository;
 import com.word_trainer.services.AuthorizationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -13,6 +14,9 @@ import java.util.function.Predicate;
  */
 @Data
 public class LoginModel {
+
+    @Autowired
+    protected UserRepository userRepository;
 
     @Autowired
     protected AuthorizationService authorizationService;

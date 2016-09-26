@@ -31,6 +31,9 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context', version: "$springVersion"
     compile group: 'org.springframework', name: 'spring-aop', version: "$springVersion"
     compile group: 'org.springframework', name: 'spring-test', version: "$springVersion"
+
+    compile "org.springframework.data:spring-data-mongodb:1.9.3.RELEASE"
+
 }
 
 
