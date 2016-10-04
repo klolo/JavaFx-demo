@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.LearnController">
 
     <stylesheets>
@@ -54,8 +58,8 @@
                 <ColumnConstraints maxWidth="Infinity" minWidth="0.0" prefWidth="0.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints />
-                <RowConstraints />
+                <RowConstraints maxHeight="14.0" minHeight="9.0" prefHeight="9.0" />
+                <RowConstraints maxHeight="46.0" minHeight="41.0" prefHeight="46.0" />
                 <RowConstraints maxHeight="45.0" minHeight="22.0" prefHeight="45.0" />
                 <RowConstraints maxHeight="84.0" minHeight="61.0" prefHeight="61.0" />
             </rowConstraints>
@@ -64,7 +68,7 @@
     </center>
 
     <bottom>
-        <HBox>
+        <HBox prefHeight="89.0" prefWidth="809.0">
             <padding>
                 <Insets bottom="10" left="25" right="25" top="25" />
             </padding>
@@ -74,7 +78,7 @@
                         <Tooltip text="Close application" />
                     </tooltip>
                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="/common/images/menu.png" />
                             </image>
@@ -88,7 +92,7 @@
                         <Tooltip text="Close application" />
                     </tooltip>
                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="/common/images/start.png" />
                             </image>

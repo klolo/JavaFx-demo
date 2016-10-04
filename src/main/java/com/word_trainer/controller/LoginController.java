@@ -1,7 +1,7 @@
 package com.word_trainer.controller;
 
-import com.word_trainer.model.LoginModel;
 import com.word_trainer.application.StageSwitch;
+import com.word_trainer.model.LoginModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -11,9 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 @Component
 @Slf4j

@@ -18,15 +18,23 @@
     </stylesheets>
 
     <padding>
-        <Insets left="25"/>
+        <Insets left="25" right="10"/>
     </padding>
     <children>
-        <Label styleClass="headerTitle" text="%app.name"/>
+        <Label styleClass="headerTitle" text="%app.header">
+            <graphic>
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="/common/images/germany.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Label>
         <Region prefWidth="200.0" HBox.hgrow="ALWAYS"/>
 
         <Button mnemonicParsing="false" onAction="#closeApplication" styleClass="exitButton">
             <tooltip>
-                <Tooltip text="Close application" />
+                <Tooltip text="Close application"/>
             </tooltip>
             <graphic>
                 <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">

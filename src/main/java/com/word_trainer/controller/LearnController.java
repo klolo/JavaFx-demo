@@ -34,7 +34,7 @@ public class LearnController extends LearnModel {
                 }
         );
 
-        scoreLeft = (WORDS_IN_LEARNING_SET * WORD_CORRECT_ANSWER_MIN);
+        scoreLeft = (double) WORDS_IN_LEARNING_SET * (double) WORD_CORRECT_ANSWER_MIN;
         setWordLabelOnView();
     }
 
@@ -103,7 +103,7 @@ public class LearnController extends LearnModel {
 
     private void changeProgress() {
         final double maxScoreLevel = (double) WORDS_IN_LEARNING_SET * (double) WORD_CORRECT_ANSWER_MIN;
-        final double progress = (maxScoreLevel - (double) scoreLeft) / maxScoreLevel;
+        final double progress = (maxScoreLevel -  scoreLeft) / maxScoreLevel;
         log.info("Progress: {}, wordsIndex: {}", progress, wordIndex);
         learnProgress.setProgress(progress);
     }

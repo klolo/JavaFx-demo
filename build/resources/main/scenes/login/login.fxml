@@ -5,11 +5,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="mainWindow" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.LoginController">
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            styleClass="mainWindow" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.word_trainer.controller.LoginController" >
 
     <stylesheets>
-        <URL value="@/common/style/common.css" />
-        <URL value="@/scenes/login/login.css" />
+        <URL value="@/common/style/common.css"/>
+        <URL value="@/scenes/login/login.css"/>
     </stylesheets>
 
     <!-- header -->
@@ -19,43 +24,33 @@
 
     <!-- Login area -->
     <center>
-        <GridPane alignment="center" hgap="10" minWidth="500" prefHeight="239.0" prefWidth="544.0" vgap="10">
+        <GridPane  GridPane.hgrow="ALWAYS" alignment="center" hgap="10" minWidth="500" prefHeight="239.0" prefWidth="544.0" vgap="10">
             <padding>
-                <Insets bottom="10" left="25" right="25" top="25" />
+                <Insets bottom="10" left="25" right="25" top="35"/>
             </padding>
             <children>
-                <Label styleClass="loginHeader" text="Please enter login and password for protect your learn progress" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label styleClass="loginHeader" text="%login.header"
+                       wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <padding>
-                        <Insets bottom="5" left="5" right="5" top="5" />
+                        <Insets bottom="10" left="5" right="5" top="10"/>
                     </padding>
                 </Label>
 
+                <JFXTextField fx:id="loginField" promptText="%login.field.login" GridPane.columnIndex="0"
+                              GridPane.rowIndex="2"/>
 
-                <Text styleClass="bigFont" text="%login.label" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                <JFXPasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="200.0"
+                               promptText="%login.field.password" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-                <TextField fx:id="loginField" promptText="%login.login.prompt" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-
-                <PasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="200.0" promptText="%login.password.prompt" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-
-                <Button id="loginButton" onAction="#login" prefHeight="33.0" prefWidth="212.0" styleClass="loginButton" text="Login" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <JFXButton id="loginButton" onAction="#login" prefHeight="33.0" prefWidth="212.0"
+                           text="%login.button.login" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="button-raised" />
 
             </children>
-            <columnConstraints>
-                <ColumnConstraints maxWidth="173.0" minWidth="173.0" prefWidth="173.0" />
-                <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints />
-                <RowConstraints />
-                <RowConstraints maxHeight="20.0" minHeight="16.0" prefHeight="17.0" />
-                <RowConstraints maxHeight="44.0" minHeight="40.0" prefHeight="43.0" />
-            <RowConstraints />
-            </rowConstraints>
         </GridPane>
     </center>
 
     <bottom>
-        <Label text="Sample JavaFx application" />
+        <Label text=" by Kamil Lolo"/>
     </bottom>
 
 </BorderPane>

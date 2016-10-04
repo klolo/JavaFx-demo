@@ -46,9 +46,9 @@ public class LearnModel {
 
     protected List<LearnEntity> learnList = new LinkedList<>();
 
-    protected int WORDS_IN_LEARNING_SET = 2;
+    protected int WORDS_IN_LEARNING_SET = 5;
 
-    protected int WORD_CORRECT_ANSWER_MIN = 1;
+    protected int WORD_CORRECT_ANSWER_MIN = 2;
 
     protected static Random random = new Random();
 
@@ -60,7 +60,7 @@ public class LearnModel {
     @Getter
     protected int incorrect;
 
-    protected int scoreLeft;
+    protected double scoreLeft;
 
     @Setter
     protected LearnMode learnMode;
