@@ -39,6 +39,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.webjars/font-awesome
     compile group: 'org.webjars', name: 'font-awesome', version: '4.6.3'
 
+    compile "org.springframework.data:spring-data-mongodb:1.9.3.RELEASE"
+
 }
 
 
