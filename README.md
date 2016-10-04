@@ -1,3 +1,3 @@
 ### Sample JavaFx application for learning irregular german verbs
 
-![alt tag](https://github.com/klolo/JavaFx-demo/doc/scree1.png)
+![alt tag](https://raw.githubusercontent.com/klolo/JavaFx-demo/master/doc/screen1.png)
