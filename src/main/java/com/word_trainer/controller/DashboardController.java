@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.controlsfx.control.Notifications;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -38,21 +39,36 @@ public class DashboardController extends DashboardModel {
     private void deleteItem(final ActionEvent event) {
         final int rowIndex = ((TableRow) ((Button) event.getSource()).getParent().getParent()).getIndex();
         log.info("delete item, event: {}", rowIndex);
+
+        Notifications.create()
+                .title("Item deleted")
+                .text("You did remove word: " + wordsList.get(rowIndex).getForeignWord())
+                .showWarning();
+
         wordsList.remove(rowIndex);
     }
 
     public void addWord() {
         log.info("add new word: {} - {}", foreignWordField.getText(), meaningField.getText());
+        boolean isDone = false;
         if (foreignWordField.getText().isEmpty() || meaningField.getText().isEmpty() || wordsList.contains(foreignWordField.getText())) {
             log.warn("cannot add word");
-            return;
+        }
+        else {
+            final Word newWord = new Word();
+            newWord.setMeaning(meaningField.getText());
+            newWord.setForeignWord(foreignWordField.getText());
+            newWord.setId(wordsTableView.getItems().size() + 1);
+            wordsTableView.getItems().add(newWord);
+            isDone = true;
         }
 
-        final Word newWord = new Word();
-        newWord.setMeaning(meaningField.getText());
-        newWord.setForeignWord(foreignWordField.getText());
-        newWord.setId(wordsTableView.getItems().size() + 1);
-        wordsTableView.getItems().add(newWord);
+        String messageKey = isDone ? "dashboard.add.ok" : "dashboard.add.error";
+        Notifications.create()
+                .title( getMessageForKey("dashboard.add.title"))
+                .text(getMessageForKey(messageKey ))
+                .showWarning();
+
     }
 
     public void startLearning(final ActionEvent event) throws IOException {

@@ -1,5 +1,7 @@
 package com.word_trainer.model;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.word_trainer.controller.BaseController;
 import com.word_trainer.controller.LearnController;
 import com.word_trainer.dto.Word;
 import com.word_trainer.services.WordsService;
@@ -10,7 +12,7 @@ import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-public abstract class DashboardModel {
+public abstract class DashboardModel extends BaseController {
 
     @Autowired
     protected LearnController learnController;
@@ -31,7 +33,7 @@ public abstract class DashboardModel {
     protected TableColumn actionColumn;
 
     @FXML
-    protected ChoiceBox learningModeChoice;
+    protected JFXComboBox learningModeChoice;
 
     protected ObservableList<Word> wordsList;
 

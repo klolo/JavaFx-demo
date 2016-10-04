@@ -1,16 +1,19 @@
 package com.word_trainer.model;
 
+import com.word_trainer.controller.BaseController;
 import com.word_trainer.dto.Word;
 import com.word_trainer.learn.LearnEntity;
 import com.word_trainer.learn.LearnMode;
 import com.word_trainer.services.WordsService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import lombok.Getter;
 import lombok.Setter;
+import org.controlsfx.control.PopOver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.LinkedList;
@@ -18,10 +21,13 @@ import java.util.List;
 import java.util.Random;
 
 
-public class LearnModel {
+public class LearnModel extends BaseController{
 
     @Autowired
     protected WordsService wordsService;
+
+    @FXML
+    protected Button back;
 
     @FXML
     protected Label currentWord;
@@ -43,6 +49,8 @@ public class LearnModel {
 
     @Setter
     protected ObservableList<Word> wordsList;
+
+    protected PopOver closeConfirmPopup;
 
     protected List<LearnEntity> learnList = new LinkedList<>();
 

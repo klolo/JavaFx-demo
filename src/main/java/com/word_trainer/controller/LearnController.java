@@ -1,6 +1,7 @@
 package com.word_trainer.controller;
 
 
+import com.jfoenix.controls.JFXButton;
 import com.word_trainer.dto.Word;
 import com.word_trainer.model.LearnModel;
 import com.word_trainer.learn.LearnEntity;
@@ -8,9 +9,16 @@ import com.word_trainer.learn.LearnMode;
 import com.word_trainer.application.StageSwitch;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
+import org.controlsfx.control.PopOver;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -69,9 +77,56 @@ public class LearnController extends LearnModel {
     }
 
     public void goToDashboard(final ActionEvent event) throws IOException {
-        wordsService.saveCurrentWords();
-        final StageSwitch stageSwitch = new StageSwitch("/scenes/dashboard/dashboard.fxml");
-        stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
+        VBox confirmPopupContent = new VBox();
+        confirmPopupContent.getChildren().add(new Label("Czy chcesz napewno wyjsc?"));
+        confirmPopupContent.setPadding(new Insets(10,10,10,10));
+
+        HBox buttonBox = new HBox();
+        buttonBox.setPadding(new Insets(10,10,10,10));
+
+        createConfirmButton(event, buttonBox);
+        createFreeSpace(buttonBox);
+        createRejectButton(confirmPopupContent, buttonBox);
+
+        closeConfirmPopup = new PopOver(confirmPopupContent);
+        closeConfirmPopup.show(back);
+    }
+
+    private void createFreeSpace(final HBox buttonBox) {
+        Region freeSpace = new Region();
+        freeSpace.setMinWidth(50);
+        buttonBox.getChildren().add(freeSpace);
+    }
+
+    private void createRejectButton(final VBox confirmPopupContent, final HBox buttonBox) {
+        final Button rejectButton = new Button("Nie");
+        rejectButton.getStyleClass().add("button-raised");
+        rejectButton.setOnMouseClicked(event1 -> {
+            LOGGER.info("popup select: yes");
+            closeConfirmPopup.hide();
+        });
+        rejectButton.setMaxWidth(80);
+        buttonBox.getChildren().add(rejectButton);
+        confirmPopupContent.getChildren().add(buttonBox);
+    }
+
+    private void createConfirmButton(final ActionEvent event, final HBox buttonBox) {
+        final Button confirmButton = new Button("Tak");
+        confirmButton.getStyleClass().add("button-raised");
+        confirmButton.setMaxWidth(80);
+        confirmButton.setOnMouseClicked(event1 -> {
+            LOGGER.info("popup select: yes");
+            closeConfirmPopup.hide();
+            wordsService.saveCurrentWords();
+            final StageSwitch stageSwitch = new StageSwitch("/scenes/dashboard/dashboard.fxml");
+            try {
+                stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
+            }
+            catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+        buttonBox.getChildren().add(confirmButton);
     }
 
     public void next(final ActionEvent event) throws IOException {
@@ -103,7 +158,7 @@ public class LearnController extends LearnModel {
 
     private void changeProgress() {
         final double maxScoreLevel = (double) WORDS_IN_LEARNING_SET * (double) WORD_CORRECT_ANSWER_MIN;
-        final double progress = (maxScoreLevel -  scoreLeft) / maxScoreLevel;
+        final double progress = (maxScoreLevel - scoreLeft) / maxScoreLevel;
         log.info("Progress: {}, wordsIndex: {}", progress, wordIndex);
         learnProgress.setProgress(progress);
     }

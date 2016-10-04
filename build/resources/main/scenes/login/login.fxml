@@ -42,8 +42,8 @@
                 <JFXPasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="200.0"
                                promptText="%login.field.password" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-                <JFXButton id="loginButton" onAction="#login" prefHeight="33.0" prefWidth="212.0"
-                           text="%login.button.login" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="button-raised" />
+                <JFXButton styleClass="button-raised"  id="loginButton" onAction="#login" prefHeight="33.0" prefWidth="212.0"
+                           text="%login.button.login" GridPane.columnIndex="0" GridPane.rowIndex="4" />
 
             </children>
         </GridPane>

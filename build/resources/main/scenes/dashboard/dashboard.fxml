@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.lang.String?>
 <?import java.net.URL?>
+<?import com.jfoenix.controls.JFXTextField?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0"
             prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.DashboardController">
@@ -32,8 +34,8 @@
                 <HBox prefHeight="36.0" prefWidth="408.0" spacing="10">
                     <children>
                         <Label alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="102.0" text="Add new word: "/>
-                        <TextField fx:id="foreignWordField" promptText="foreign word"/>
-                        <TextField fx:id="meaningField" promptText="meaning"/>
+                        <JFXTextField fx:id="foreignWordField" promptText="foreign word"/>
+                        <JFXTextField fx:id="meaningField" promptText="meaning"/>
 
                         <Button mnemonicParsing="false" onAction="#addWord" styleClass="startButton">
                             <tooltip>
@@ -55,11 +57,6 @@
                     <children>
                         <TableView fx:id="wordsTableView" prefHeight="378.0" prefWidth="408.0" HBox.hgrow="ALWAYS">
                             <columns>
-                                <TableColumn prefWidth="34.0" text="lp">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="id"/>
-                                    </cellValueFactory>
-                                </TableColumn>
                                 <TableColumn fx:id="foreignWord" editable="true" maxWidth="Infinity" prefWidth="225.0"
                                              text="foreignWord">
                                     <cellValueFactory>
@@ -82,7 +79,7 @@
                                     </cellValueFactory>
                                 </TableColumn>
                                 <TableColumn fx:id="actionColumn" prefWidth="141.0" resizable="false" sortable="false"
-                                             text="action"/>
+                                             text=""/>
                             </columns>
                         </TableView>
                     </children>
@@ -98,16 +95,15 @@
                 <Insets bottom="10" left="10" right="10"/>
             </padding>
             <children>
-                <Label prefHeight="16.0" prefWidth="116.0" text="Learning mode:"/>
-                <ChoiceBox fx:id="learningModeChoice" layoutX="396" layoutY="66" maxWidth="23" minWidth="200"
-                           prefHeight="24" prefWidth="61" value="First meaning">
+                <JFXComboBox fx:id="learningModeChoice" layoutX="396" layoutY="66" maxWidth="23" minWidth="200"
+                             prefHeight="24" prefWidth="61" value="First meaning">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="First foreign word"/>
                             <String fx:value="First meaning"/>
                         </FXCollections>
                     </items>
-                </ChoiceBox>
+                </JFXComboBox>
                 <Region prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                 <Button mnemonicParsing="false" onAction="#startLearning" styleClass="startButton">
                     <tooltip>

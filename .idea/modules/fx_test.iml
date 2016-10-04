@@ -21,6 +21,7 @@
     <orderEntry type="library" name="Gradle: com.jfoenix:jfoenix:1.0.0" level="project" />
     <orderEntry type="library" name="Gradle: org.webjars:font-awesome:4.6.3" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.data:spring-data-mongodb:1.9.3.RELEASE" level="project" />
+    <orderEntry type="library" name="Gradle: de.jensd:fontawesomefx:8.9" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
     <orderEntry type="library" name="Gradle: ch.qos.logback:logback-core:1.1.7" level="project" />
     <orderEntry type="library" name="Gradle: commons-logging:commons-logging:1.2" level="project" />

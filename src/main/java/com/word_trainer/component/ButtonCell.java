@@ -1,5 +1,6 @@
 package com.word_trainer.component;
 
+import com.jfoenix.controls.JFXButton;
 import com.word_trainer.dto.Word;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -14,10 +15,11 @@ import java.util.function.Consumer;
 @Slf4j
 public class ButtonCell extends TableCell<Word, Boolean> {
 
-    private Button button;
+    private JFXButton button;
 
     public ButtonCell(final Consumer<ActionEvent> callbackConsumer, final String buttonLabel) {
-        button = new Button(buttonLabel);
+        button = new JFXButton(buttonLabel);
+        button.getStyleClass().add("button-raised");
         button.setOnAction(callbackConsumer::accept);
     }
 

@@ -41,6 +41,9 @@ dependencies {
 
     compile "org.springframework.data:spring-data-mongodb:1.9.3.RELEASE"
 
+    // https://mvnrepository.com/artifact/de.jensd/fontawesomefx
+    compile group: 'de.jensd', name: 'fontawesomefx', version: '8.9'
+
 }
 
 
