@@ -20,7 +20,7 @@ public class SpringFxmlLoader {
 
     private static final String BUNDLES_PATH = "common//bundles//messages";
 
-    private static final String DEFAULT_LOCALE = "pl";
+    private static String defaultLocale = "pl";
 
     private static final ApplicationContext applicationContext
             = new AnnotationConfigApplicationContext(SpringApplicationConfig.class);
@@ -32,7 +32,7 @@ public class SpringFxmlLoader {
 
         try (final InputStream fxmlStream = SpringFxmlLoader.class.getResourceAsStream(url)) {
             final FXMLLoader loader = new FXMLLoader();
-            resourceBundle = ResourceBundle.getBundle(BUNDLES_PATH, new Locale(DEFAULT_LOCALE));
+            resourceBundle = ResourceBundle.getBundle(BUNDLES_PATH, new Locale(defaultLocale));
             loader.setResources(resourceBundle);
             loader.setControllerFactory(applicationContext::getBean);
             loader.setLocation(Class.class.getResource(url));
@@ -41,5 +41,9 @@ public class SpringFxmlLoader {
         catch (final IOException ioException) {
             throw new RuntimeException(ioException);
         }
+    }
+
+    public static void changeLocale(final String locale) {
+        defaultLocale = locale;
     }
 }

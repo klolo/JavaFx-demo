@@ -1,5 +1,6 @@
 package com.word_trainer.controller;
 
+import com.word_trainer.application.SpringFxmlLoader;
 import com.word_trainer.application.StageSwitch;
 import com.word_trainer.model.LoginModel;
 import javafx.event.ActionEvent;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Odpowiada za zalogowania uzytkownika oraz za zmiane jezyka.
+ */
 @Component
 @Slf4j
 public class LoginController extends LoginModel {
@@ -21,6 +25,7 @@ public class LoginController extends LoginModel {
     public void initialize() {
         loginField.focusedProperty().addListener((observable, oldValue, newValue) -> validateFieldOnBlur(loginField, newValue));
         passwordField.focusedProperty().addListener((observable, oldValue, newValue) -> validateFieldOnBlur(passwordField, newValue));
+        langCombobox.getSelectionModel().select(selectedLang);
     }
 
     private void validateFieldOnBlur(final TextField field, final boolean focused) {
@@ -47,4 +52,22 @@ public class LoginController extends LoginModel {
         }
     }
 
+    public void changeLang(ActionEvent actionEvent) throws IOException {
+        final String selectedLangText = (String) langCombobox.getSelectionModel().getSelectedItem();
+        switch (selectedLangText) {
+            case "Polski" : {
+                SpringFxmlLoader.changeLocale("pl");
+                selectedLang = 0;
+                break;
+            }
+            case "English" : {
+                SpringFxmlLoader.changeLocale("en");
+                selectedLang = 1;
+                break;
+            }
+        }
+
+        final StageSwitch stageSwitch = new StageSwitch("/scenes/login/login.fxml");
+        stageSwitch.load((Stage) ((Node) actionEvent.getSource()).getScene().getWindow());
+    }
 }

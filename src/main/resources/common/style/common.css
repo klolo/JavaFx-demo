@@ -38,3 +38,11 @@
     -fx-pref-width: 200;
     -fx-text-fill: WHITE;
 }
+
+.bigFont {
+    -fx-font-size: 14px;
+}
+
+.hugeFont {
+    -fx-font-size: 25px;
+}

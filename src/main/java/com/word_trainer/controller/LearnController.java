@@ -1,12 +1,12 @@
 package com.word_trainer.controller;
 
 
-import com.jfoenix.controls.JFXButton;
+import com.word_trainer.application.StageSwitch;
 import com.word_trainer.dto.Word;
-import com.word_trainer.model.LearnModel;
 import com.word_trainer.learn.LearnEntity;
 import com.word_trainer.learn.LearnMode;
-import com.word_trainer.application.StageSwitch;
+import com.word_trainer.model.LearnModel;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -28,9 +28,39 @@ import java.util.stream.IntStream;
 @Component
 public class LearnController extends LearnModel {
 
+
     @FXML
     public void initialize() {
         setRadioVisibility(false);
+
+        timeTimer = new AnimationTimer() {
+            int tics = 0;
+
+            @Override
+            public void handle(final long now) {
+                tics++;
+                if (tics > 60) {
+                    seconds++;
+                    tics = 0;
+
+                    if (seconds % 60 == 0) {
+                        minutes++;
+                        seconds = 0;
+                    }
+
+                    timer.setText(
+                            changeIntToTwoCharacterString(minutes) + ":" +
+                                    changeIntToTwoCharacterString(seconds));
+                }
+
+            }
+        };
+
+        timeTimer.start();
+    }
+
+    private String changeIntToTwoCharacterString(int value) {
+        return value > 9 ? String.valueOf(value) : "0" + value;
     }
 
     public void init() {
@@ -79,10 +109,10 @@ public class LearnController extends LearnModel {
     public void goToDashboard(final ActionEvent event) throws IOException {
         VBox confirmPopupContent = new VBox();
         confirmPopupContent.getChildren().add(new Label("Czy chcesz napewno wyjsc?"));
-        confirmPopupContent.setPadding(new Insets(10,10,10,10));
+        confirmPopupContent.setPadding(new Insets(10, 10, 10, 10));
 
         HBox buttonBox = new HBox();
-        buttonBox.setPadding(new Insets(10,10,10,10));
+        buttonBox.setPadding(new Insets(10, 10, 10, 10));
 
         createConfirmButton(event, buttonBox);
         createFreeSpace(buttonBox);
@@ -94,7 +124,7 @@ public class LearnController extends LearnModel {
 
     private void createFreeSpace(final HBox buttonBox) {
         Region freeSpace = new Region();
-        freeSpace.setMinWidth(50);
+        freeSpace.setMinWidth(20);
         buttonBox.getChildren().add(freeSpace);
     }
 
@@ -130,6 +160,9 @@ public class LearnController extends LearnModel {
     }
 
     public void next(final ActionEvent event) throws IOException {
+        currentWordReverse.setVisible(false);
+        setRadioVisibility(false);
+
         int tryCount = 0;
         while (true) {
             int tmpWordIndex = wordIndex + 1;

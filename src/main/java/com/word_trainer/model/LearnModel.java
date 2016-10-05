@@ -5,6 +5,7 @@ import com.word_trainer.dto.Word;
 import com.word_trainer.learn.LearnEntity;
 import com.word_trainer.learn.LearnMode;
 import com.word_trainer.services.WordsService;
+import javafx.animation.AnimationTimer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -47,6 +48,9 @@ public class LearnModel extends BaseController{
     @FXML
     protected Label currentWordReverse;
 
+    @FXML
+    protected Label timer;
+
     @Setter
     protected ObservableList<Word> wordsList;
 
@@ -72,5 +76,11 @@ public class LearnModel extends BaseController{
 
     @Setter
     protected LearnMode learnMode;
+
+    protected AnimationTimer timeTimer;
+
+    protected int seconds;
+
+    protected int minutes;
 
 }
