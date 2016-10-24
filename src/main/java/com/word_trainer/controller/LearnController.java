@@ -13,6 +13,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -22,16 +24,18 @@ import org.controlsfx.control.PopOver;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.LinkedList;
 import java.util.stream.IntStream;
 
 @Slf4j
 @Component
 public class LearnController extends LearnModel {
 
-
     @FXML
     public void initialize() {
         setRadioVisibility(false);
+        currentWordReverse.setVisible(false);
 
         timeTimer = new AnimationTimer() {
             int tics = 0;
@@ -56,6 +60,33 @@ public class LearnController extends LearnModel {
             }
         };
 
+        root.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case DIGIT1: {
+                    if (currentWordReverse.isVisible()) {
+                        onKnowRadioClick();
+                    }
+                    break;
+                }
+                case DIGIT2: {
+                    if (currentWordReverse.isVisible()) {
+                        onNotKnowRadioClick();
+                    }
+                    break;
+                }
+                case DIGIT3: {
+                    if (currentWordReverse.isVisible()) {
+                        onLaterRadioClick();
+                    }
+                    break;
+                }
+                case ENTER: {
+                    show();
+                    break;
+                }
+            }
+        });
+
         timeTimer.start();
     }
 
@@ -64,6 +95,9 @@ public class LearnController extends LearnModel {
     }
 
     public void init() {
+        correct = 0;
+        incorrect = 0;
+        learnList = new LinkedList<>();
         IntStream.range(0, WORDS_IN_LEARNING_SET).forEach(
                 i -> {
                     final LearnEntity learnEntity = LearnEntity.fromWord(wordsList.get(getRandomInt(0, wordsList.size())));
@@ -114,7 +148,7 @@ public class LearnController extends LearnModel {
         HBox buttonBox = new HBox();
         buttonBox.setPadding(new Insets(10, 10, 10, 10));
 
-        createConfirmButton(event, buttonBox);
+        createConfirmButton(buttonBox);
         createFreeSpace(buttonBox);
         createRejectButton(confirmPopupContent, buttonBox);
 
@@ -140,7 +174,7 @@ public class LearnController extends LearnModel {
         confirmPopupContent.getChildren().add(buttonBox);
     }
 
-    private void createConfirmButton(final ActionEvent event, final HBox buttonBox) {
+    private void createConfirmButton(final HBox buttonBox) {
         final Button confirmButton = new Button("Tak");
         confirmButton.getStyleClass().add("button-raised");
         confirmButton.setMaxWidth(80);
@@ -150,7 +184,7 @@ public class LearnController extends LearnModel {
             wordsService.saveCurrentWords();
             final StageSwitch stageSwitch = new StageSwitch("/scenes/dashboard/dashboard.fxml");
             try {
-                stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
+                stageSwitch.load((Stage) ((Node) laterRadio).getScene().getWindow());
             }
             catch (IOException e1) {
                 e1.printStackTrace();
@@ -159,7 +193,7 @@ public class LearnController extends LearnModel {
         buttonBox.getChildren().add(confirmButton);
     }
 
-    public void next(final ActionEvent event) throws IOException {
+    public void next() throws IOException {
         currentWordReverse.setVisible(false);
         setRadioVisibility(false);
 
@@ -181,7 +215,7 @@ public class LearnController extends LearnModel {
             if (tryCount == learnList.size()) {
                 log.info("Learing is done");
                 final StageSwitch stageSwitch = new StageSwitch("/scenes/summary/summary.fxml");
-                stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
+                stageSwitch.load((Stage) ((Node) currentWord).getScene().getWindow());
                 break;
             }
         }
@@ -196,38 +230,43 @@ public class LearnController extends LearnModel {
         learnProgress.setProgress(progress);
     }
 
-    public void show() throws IOException {
+    public void show() {
         setRadioVisibility(true);
         setSecondWordLabelOnView();
     }
 
-    private void onRadioEvent(final ActionEvent event) throws IOException {
+    private void onRadioEvent() {
         setRadioVisibility(false);
         currentWordReverse.setVisible(false);
         changeProgress();
-        next(event);
+        try {
+            next();
+        }
+        catch (final IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void onKnowRadioClick(final ActionEvent event) throws IOException {
+    public void onKnowRadioClick() {
         log.info("I know");
         knowRadio.setSelected(false);
         scoreLeft -= 1;
         getCurrentWord().increaseCorrectAnswersAmount();
-        onRadioEvent(event);
+        onRadioEvent();
         correct++;
     }
 
-    public void onNotKnowRadioClick(final ActionEvent event) throws IOException {
+    public void onNotKnowRadioClick() {
         log.info("I do not know");
         notKnowRadio.setSelected(false);
         getCurrentWord().increaseIncorrectAnswersAmount();
-        onRadioEvent(event);
+        onRadioEvent();
         incorrect++;
     }
 
-    public void onLaterRadioClick(final ActionEvent event) throws IOException {
+    public void onLaterRadioClick() {
         log.info("I need some time");
-        onRadioEvent(event);
+        onRadioEvent();
         laterRadio.setSelected(false);
     }
 

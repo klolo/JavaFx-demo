@@ -5,9 +5,10 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0"
-            prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.LearnController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="519.0" prefWidth="809.0" stylesheets="/scenes/login/login.css"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.word_trainer.controller.LearnController">
 
     <stylesheets>
         <URL value="@/common/style/common.css"/>
@@ -36,38 +37,40 @@
                         <ProgressBar fx:id="learnProgress" prefHeight="20.0" prefWidth="559.0" progress="0.0"
                                      GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS"
                                      GridPane.rowIndex="0"/>
-                        <Label GridPane.columnSpan="2" fx:id="currentWord" styleClass="hugeFont"
-                               GridPane.columnIndex="0"
-                               GridPane.rowIndex="1"/>
+                        <Label fx:id="currentWord" styleClass="hugeFont" GridPane.columnIndex="0"
+                               GridPane.columnSpan="2" GridPane.rowIndex="1"/>
 
                         <HBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <children>
 
 
-                            <Button text="%learn.show" mnemonicParsing="false" onAction="#show" styleClass="startButton">
-                                <graphic>
-                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true"
-                                               preserveRatio="true">
-                                        <image>
-                                            <Image url="/common/images/restart.png"/>
-                                        </image>
-                                    </ImageView>
-                                </graphic>
-                            </Button>
+                                <Button mnemonicParsing="false" onAction="#show" styleClass="startButton"
+                                        text="%learn.show">
+                                    <graphic>
+                                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="/common/images/restart.png"/>
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                            </children>
 
                         </HBox>
 
                         <Label fx:id="currentWordReverse" styleClass="hugeFont" GridPane.columnIndex="0"
                                GridPane.columnSpan="3" GridPane.rowIndex="2"/>
 
-                        <RadioButton fx:id="knowRadio" onAction="#onKnowRadioClick" prefHeight="18.0" prefWidth="85.0"
-                                     styleClass="bigFont" text="I know" toggleGroup="$myToggleGroup"
+                        <RadioButton fx:id="knowRadio" onAction="#onKnowRadioClick" prefHeight="18.0" prefWidth="181.0"
+                                     styleClass="bigFont" text="%learn.know" toggleGroup="$myToggleGroup"
                                      GridPane.columnIndex="0" GridPane.rowIndex="3"/>
                         <RadioButton fx:id="notKnowRadio" onAction="#onNotKnowRadioClick" prefHeight="18.0"
-                                     prefWidth="130.0" styleClass="bigFont" text="I do not know"
+                                     prefWidth="215.0" styleClass="bigFont" text="%learn.not.know"
                                      toggleGroup="$myToggleGroup" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                        <RadioButton fx:id="laterRadio" onAction="#onLaterRadioClick" prefHeight="90.0" prefWidth="91.0"
-                                     styleClass="bigFont" text="Later" toggleGroup="$myToggleGroup"
-                                     GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                        <RadioButton fx:id="laterRadio" onAction="#onLaterRadioClick" prefHeight="51.0"
+                                     prefWidth="139.0" styleClass="bigFont" text="%learn.later"
+                                     toggleGroup="$myToggleGroup" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
                     </children>
                     <columnConstraints>
                         <ColumnConstraints maxWidth="Infinity" minWidth="124.0" prefWidth="197.0"/>

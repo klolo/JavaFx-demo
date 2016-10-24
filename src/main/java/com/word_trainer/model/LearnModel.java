@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
+import javafx.scene.layout.BorderPane;
 import lombok.Getter;
 import lombok.Setter;
 import org.controlsfx.control.PopOver;
@@ -23,6 +24,8 @@ import java.util.Random;
 
 
 public class LearnModel extends BaseController{
+    @FXML
+    public BorderPane root;
 
     @Autowired
     protected WordsService wordsService;

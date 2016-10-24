@@ -23,6 +23,8 @@ public class Word {
 
     final static int MINIMAL_CORRECT_ANSWER = 10;
 
+    final static int MAXIMAL_CORRECT_ANSWER_PER_SESSION = 3;
+
     final static float KNOW_LEVEL = 0.90f;
 
     public String getProgressIndicator() {
@@ -30,12 +32,36 @@ public class Word {
     }
 
     public String getPercentProgress() {
-        String percentProgress = String.valueOf(levelOfFamiliarity * 100);
+        String percentProgress;
+
+        if (correctAnswers < MINIMAL_CORRECT_ANSWER) {
+            percentProgress = String.valueOf(getProgressForWordBeloveMinimumLevel());
+        }
+        else {
+            percentProgress = String.valueOf(getProgressForWordAboveMinimumLevel());
+        }
+
         return percentProgress.substring(0, percentProgress.indexOf(".")) + " %";
+    }
+
+    private float getProgressForWordBeloveMinimumLevel() {
+        if (correctAnswers > incorrectAnswers) {
+            return correctAnswers - incorrectAnswers / MINIMAL_CORRECT_ANSWER;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    private float getProgressForWordAboveMinimumLevel() {
+        return correctAnswers / incorrectAnswers;
     }
 
 
     public void increaseCorrectAnswersAmount() {
+        if (correctAnswers > MAXIMAL_CORRECT_ANSWER_PER_SESSION) {
+            return;
+        }
         correctAnswers++;
         changeLevelOfFamiliarity();
     }

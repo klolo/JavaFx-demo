@@ -5,6 +5,7 @@ import com.word_trainer.repository.UserRepository;
 import com.word_trainer.services.AuthorizationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,9 @@ public class LoginModel {
 
     @FXML
     protected TextField passwordField;
+
+    @FXML
+    protected BorderPane root;
 
     @Setter
     @Getter

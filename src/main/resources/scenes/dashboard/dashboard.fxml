@@ -104,7 +104,7 @@
                 <Region prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                 <Button mnemonicParsing="false" onAction="#startLearning" styleClass="startButton">
                     <tooltip>
-                        <Tooltip text="Close application"/>
+                        <Tooltip text="%dashboard.learning.start"/>
                     </tooltip>
                     <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
