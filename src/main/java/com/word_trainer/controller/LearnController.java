@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -60,34 +61,35 @@ public class LearnController extends LearnModel {
             }
         };
 
-        root.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-                case DIGIT1: {
-                    if (currentWordReverse.isVisible()) {
-                        onKnowRadioClick();
-                    }
-                    break;
-                }
-                case DIGIT2: {
-                    if (currentWordReverse.isVisible()) {
-                        onNotKnowRadioClick();
-                    }
-                    break;
-                }
-                case DIGIT3: {
-                    if (currentWordReverse.isVisible()) {
-                        onLaterRadioClick();
-                    }
-                    break;
-                }
-                case ENTER: {
-                    show();
-                    break;
-                }
-            }
-        });
-
+        root.setOnKeyPressed(this::processKeyboardEvent);
         timeTimer.start();
+    }
+
+    private void processKeyboardEvent(final KeyEvent event) {
+        switch (event.getCode()) {
+            case DIGIT1: {
+                if (currentWordReverse.isVisible()) {
+                    onKnowRadioClick();
+                }
+                break;
+            }
+            case DIGIT2: {
+                if (currentWordReverse.isVisible()) {
+                    onNotKnowRadioClick();
+                }
+                break;
+            }
+            case DIGIT3: {
+                if (currentWordReverse.isVisible()) {
+                    onLaterRadioClick();
+                }
+                break;
+            }
+            case ENTER: {
+                show();
+                break;
+            }
+        }
     }
 
     private String changeIntToTwoCharacterString(int value) {
@@ -98,16 +100,19 @@ public class LearnController extends LearnModel {
         correct = 0;
         incorrect = 0;
         learnList = new LinkedList<>();
-        IntStream.range(0, WORDS_IN_LEARNING_SET).forEach(
-                i -> {
-                    final LearnEntity learnEntity = LearnEntity.fromWord(wordsList.get(getRandomInt(0, wordsList.size())));
-                    log.info("adding: {}", learnEntity);
-                    learnList.add(learnEntity);
-                }
-        );
+
+        wordsList.sort((o1, o2) -> o1.getCorrectAnswers() > o2.getCorrectAnswers() ? 1 : -1);
+
+        final int FIRST_WORD_OFFSET = 3;
+        for (int i = FIRST_WORD_OFFSET; i <= WORDS_IN_LEARNING_SET + FIRST_WORD_OFFSET; ++i) {
+            final LearnEntity learnEntity = LearnEntity.fromWord(wordsList.get(i));
+            log.info("adding: {}", learnEntity);
+            learnList.add(learnEntity);
+        }
 
         scoreLeft = (double) WORDS_IN_LEARNING_SET * (double) WORD_CORRECT_ANSWER_MIN;
         setWordLabelOnView();
+
     }
 
     private void setRadioVisibility(final boolean visibility) {
@@ -184,7 +189,7 @@ public class LearnController extends LearnModel {
             wordsService.saveCurrentWords();
             final StageSwitch stageSwitch = new StageSwitch("/scenes/dashboard/dashboard.fxml");
             try {
-                stageSwitch.load((Stage) ((Node) laterRadio).getScene().getWindow());
+                stageSwitch.load((Stage) (laterRadio).getScene().getWindow());
             }
             catch (IOException e1) {
                 e1.printStackTrace();
@@ -215,7 +220,7 @@ public class LearnController extends LearnModel {
             if (tryCount == learnList.size()) {
                 log.info("Learing is done");
                 final StageSwitch stageSwitch = new StageSwitch("/scenes/summary/summary.fxml");
-                stageSwitch.load((Stage) ((Node) currentWord).getScene().getWindow());
+                stageSwitch.load((Stage) ( currentWord).getScene().getWindow());
                 break;
             }
         }
@@ -248,7 +253,7 @@ public class LearnController extends LearnModel {
     }
 
     public void onKnowRadioClick() {
-        log.info("I know");
+        log.info("I know, correct: {}, incorrect: {}", correct, incorrect);
         knowRadio.setSelected(false);
         scoreLeft -= 1;
         getCurrentWord().increaseCorrectAnswersAmount();
@@ -257,11 +262,17 @@ public class LearnController extends LearnModel {
     }
 
     public void onNotKnowRadioClick() {
-        log.info("I do not know");
+        log.info("I do not know, correct: {}, incorrect: {}", correct, incorrect);
         notKnowRadio.setSelected(false);
         getCurrentWord().increaseIncorrectAnswersAmount();
-        onRadioEvent();
+
         incorrect++;
+        if (incorrect % 3 == 0 && correct > 0) {
+            log.info("loose point");
+            scoreLeft++;
+        }
+
+        onRadioEvent();
     }
 
     public void onLaterRadioClick() {

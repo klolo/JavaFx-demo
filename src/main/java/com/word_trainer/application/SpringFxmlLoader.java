@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 @Getter
 public class SpringFxmlLoader {
 
-    private static final String BUNDLES_PATH = "common//bundles//messages";
+    private static final String BUNDLES_PATH = "common.bundles.messages";
 
     private static String defaultLocale = "pl";
 

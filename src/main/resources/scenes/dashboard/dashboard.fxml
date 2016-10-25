@@ -13,7 +13,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0"
             prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.DashboardController">
+            fx:id="root" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.DashboardController">
 
     <stylesheets>
         <URL value="@/common/style/common.css"/>

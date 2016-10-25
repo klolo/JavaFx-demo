@@ -12,6 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 import org.controlsfx.control.Notifications;
@@ -34,6 +37,18 @@ public class DashboardController extends DashboardModel {
         );
 
         actionColumn.setCellFactory(a -> new ButtonCell(this::deleteItem, "delete"));
+        root.setOnKeyPressed(this::processKeyboardEvent);
+    }
+
+    private void processKeyboardEvent(final KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            try {
+                startLearning();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void deleteItem(final ActionEvent event) {
@@ -65,15 +80,15 @@ public class DashboardController extends DashboardModel {
 
         String messageKey = isDone ? "dashboard.add.ok" : "dashboard.add.error";
         Notifications.create()
-                .title( getMessageForKey("dashboard.add.title"))
-                .text(getMessageForKey(messageKey ))
+                .title(getMessageForKey("dashboard.add.title"))
+                .text(getMessageForKey(messageKey))
                 .showWarning();
 
     }
 
-    public void startLearning(final ActionEvent event) throws IOException {
+    public void startLearning() throws IOException {
         final StageSwitch stageSwitch = new StageSwitch("/scenes/learn/learn.fxml");
-        stageSwitch.load((Stage) ((Node) event.getSource()).getScene().getWindow());
+        stageSwitch.load((Stage) (wordsTableView).getScene().getWindow());
         learnController.setWordsList(wordsList);
 
         final LearnMode selectedLearnMode =

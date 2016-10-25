@@ -13,7 +13,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0"
             prefWidth="809.0" stylesheets="/scenes/login/login.css" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.DashboardController">
+            fx:id="root" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.word_trainer.controller.DashboardController">
 
     <stylesheets>
         <URL value="@/common/style/common.css"/>
@@ -33,14 +33,11 @@
             <children>
                 <HBox prefHeight="36.0" prefWidth="408.0" spacing="10">
                     <children>
-                        <Label alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="102.0" text="Add new word: "/>
-                        <JFXTextField fx:id="foreignWordField" promptText="foreign word"/>
-                        <JFXTextField fx:id="meaningField" promptText="meaning"/>
+                        <Label alignment="CENTER_LEFT" minWidth="160" prefHeight="24.0" prefWidth="102.0" text="%dashboard.add.new"/>
+                        <JFXTextField fx:id="foreignWordField" promptText="%dashboard.add.foreign"/>
+                        <JFXTextField fx:id="meaningField" promptText="%dashboard.add.translate"/>
 
                         <Button mnemonicParsing="false" onAction="#addWord" styleClass="startButton">
-                            <tooltip>
-                                <Tooltip text="Close application"/>
-                            </tooltip>
                             <graphic>
                                 <ImageView fitHeight="15.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -58,22 +55,22 @@
                         <TableView fx:id="wordsTableView" prefHeight="378.0" prefWidth="408.0" HBox.hgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="foreignWord" editable="true" maxWidth="Infinity" prefWidth="225.0"
-                                             text="foreignWord">
+                                             text="%dashboard.add.foreign">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="foreignWord"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn editable="true" prefWidth="251.0" text="meaning">
+                                <TableColumn editable="true" prefWidth="251.0" text="%dashboard.add.translate">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="meaning"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn editable="true" prefWidth="69.0" text="status">
+                                <TableColumn editable="true" prefWidth="69.0" text="%dashboard.status">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="progressIndicator"/>
                                     </cellValueFactory>
                                 </TableColumn>
-                                <TableColumn prefWidth="95.0" text="progress">
+                                <TableColumn prefWidth="95.0" text="%dashboard.progress">
                                     <cellValueFactory>
                                         <PropertyValueFactory property="percentProgress"/>
                                     </cellValueFactory>
@@ -107,7 +104,7 @@
                 <Region prefWidth="200.0" HBox.hgrow="ALWAYS"/>
                 <Button mnemonicParsing="false" onAction="#startLearning" styleClass="startButton">
                     <tooltip>
-                        <Tooltip text="Close application"/>
+                        <Tooltip text="%dashboard.learning.start"/>
                     </tooltip>
                     <graphic>
                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">

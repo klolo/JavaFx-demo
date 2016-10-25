@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -34,6 +35,9 @@ public abstract class DashboardModel extends BaseController {
 
     @FXML
     protected JFXComboBox learningModeChoice;
+
+    @FXML
+    protected BorderPane root;
 
     protected ObservableList<Word> wordsList;
 

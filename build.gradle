@@ -2,15 +2,14 @@ group 'javaFxDemo'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'application'
 
+mainClassName = "com.word_trainer.Launcher"
 
 ext {
     mainClassName = "com.word_trainer.Launcher"
     springVersion = "4.3.2.RELEASE"
 }
-
-sourceCompatibility = 1.8
-
 
 repositories {
     mavenCentral()
@@ -46,16 +45,14 @@ dependencies {
 
 }
 
-
 jar {
     manifest {
         attributes 'Main-Class': "$mainClassName"
     }
 }
 
-task run(dependsOn: ['build'], type: JavaExec) {
+task start(dependsOn: ['build'], type: JavaExec) {
     main = "$mainClassName"
-
     standardInput = System.in
 }
 
@@ -64,5 +61,5 @@ task runApp(type: JavaExec) {
     workingDir = './build'
     classpath = sourceSets.main.runtimeClasspath
     ignoreExitValue = true
-    main =  "$mainClassName"
+    main = "$mainClassName"
 }

@@ -117,6 +117,11 @@ public class WordsService {
     public void saveCurrentWords() {
         log.info("save word list");
 
+        if (wordsList == null) {
+            log.info("Words didnt initialize");
+            return;
+        }
+
         try {
             final File file = new File(SAVE_FILE_LOCALIZATION + authorizationService.getUserId());
             if (!file.exists()) {
@@ -125,16 +130,19 @@ public class WordsService {
 
             final FileWriter fw = new FileWriter(file.getAbsoluteFile());
             try (BufferedWriter bw = new BufferedWriter(fw)) {
-                wordsList.parallelStream().map(this::changeWordToSaveFile).collect(Collectors.toList()).forEach(line -> {
-                    try {
-                        bw.write(line + "\n");
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+                wordsList
+                        .parallelStream()
+                        .map(this::changeWordToSaveFile)
+                        .collect(Collectors.toList())
+                        .forEach(line -> {
+                            try {
+                                bw.write(line + "\n");
+                            }
+                            catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
             }
-
         }
         catch (final Exception e) {
             log.error("Error while ", e);
