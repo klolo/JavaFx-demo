@@ -220,7 +220,7 @@ public class LearnController extends LearnModel {
             if (tryCount == learnList.size()) {
                 log.info("Learing is done");
                 final StageSwitch stageSwitch = new StageSwitch("/scenes/summary/summary.fxml");
-                stageSwitch.load((Stage) ( currentWord).getScene().getWindow());
+                stageSwitch.load((Stage) (currentWord).getScene().getWindow());
                 break;
             }
         }
@@ -285,4 +285,19 @@ public class LearnController extends LearnModel {
         return random.nextInt(max - min) + min;
     }
 
+    public void help() {
+        final VBox confirmPopupContent = new VBox();
+        confirmPopupContent.getChildren().add(new Label(getMessageForKey("learn.help")));
+        confirmPopupContent.setPadding(new Insets(10, 10, 10, 10));
+
+        HBox buttonBox = new HBox();
+        buttonBox.setPadding(new Insets(10, 10, 10, 10));
+
+        final Button confirmButton = new Button("Tak");
+        helpIcon.setMaxWidth(80);
+        buttonBox.getChildren().add(confirmButton);
+
+        helpPopup = new PopOver(confirmPopupContent);
+        helpPopup.show(helpIcon);
+    }
 }

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class LearnModel extends BaseController{
+public class LearnModel extends BaseController {
     @FXML
     public BorderPane root;
 
@@ -54,10 +54,15 @@ public class LearnModel extends BaseController{
     @FXML
     protected Label timer;
 
+    @FXML
+    protected Button helpIcon;
+
     @Setter
     protected ObservableList<Word> wordsList;
 
     protected PopOver closeConfirmPopup;
+
+    protected PopOver helpPopup;
 
     protected List<LearnEntity> learnList = new LinkedList<>();
 
