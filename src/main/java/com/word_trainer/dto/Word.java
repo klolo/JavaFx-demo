@@ -32,16 +32,17 @@ public class Word {
     }
 
     public String getPercentProgress() {
-        String percentProgress;
+        String percentProgress = String.valueOf(getProgress());
+        return percentProgress.substring(0, percentProgress.indexOf(".")) + " %";
+    }
 
+    public float getProgress() {
         if (correctAnswers < MINIMAL_CORRECT_ANSWER) {
-            percentProgress = String.valueOf(getProgressForWordBeloveMinimumLevel());
+            return getProgressForWordBeloveMinimumLevel();
         }
         else {
-            percentProgress = String.valueOf(getProgressForWordAboveMinimumLevel());
+           return getProgressForWordAboveMinimumLevel();
         }
-
-        return percentProgress.substring(0, percentProgress.indexOf(".")) + " %";
     }
 
     private float getProgressForWordBeloveMinimumLevel() {

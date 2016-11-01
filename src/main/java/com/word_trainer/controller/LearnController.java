@@ -10,12 +10,9 @@ import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -25,9 +22,7 @@ import org.controlsfx.control.PopOver;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
-import java.util.stream.IntStream;
 
 @Slf4j
 @Component
@@ -38,6 +33,19 @@ public class LearnController extends LearnModel {
         setRadioVisibility(false);
         currentWordReverse.setVisible(false);
 
+        if (timeTimer != null) {
+            timeTimer.stop();
+        }
+
+        initTimer();
+
+        root.setOnKeyPressed(this::processKeyboardEvent);
+        timeTimer.start();
+    }
+
+    private void initTimer() {
+        seconds = 0;
+        minutes = 0;
         timeTimer = new AnimationTimer() {
             int tics = 0;
 
@@ -60,9 +68,6 @@ public class LearnController extends LearnModel {
 
             }
         };
-
-        root.setOnKeyPressed(this::processKeyboardEvent);
-        timeTimer.start();
     }
 
     private void processKeyboardEvent(final KeyEvent event) {
@@ -101,9 +106,10 @@ public class LearnController extends LearnModel {
         incorrect = 0;
         learnList = new LinkedList<>();
 
-        wordsList.sort((o1, o2) -> o1.getCorrectAnswers() > o2.getCorrectAnswers() ? 1 : -1);
+        wordsList.sort(this::compareWord);
+        wordsList.forEach(w -> LOGGER.info("{}", w));
 
-        final int FIRST_WORD_OFFSET = 3;
+        final int FIRST_WORD_OFFSET = 1;
         for (int i = FIRST_WORD_OFFSET; i <= WORDS_IN_LEARNING_SET + FIRST_WORD_OFFSET; ++i) {
             final LearnEntity learnEntity = LearnEntity.fromWord(wordsList.get(i));
             log.info("adding: {}", learnEntity);
@@ -113,6 +119,18 @@ public class LearnController extends LearnModel {
         scoreLeft = (double) WORDS_IN_LEARNING_SET * (double) WORD_CORRECT_ANSWER_MIN;
         setWordLabelOnView();
 
+    }
+
+    int compareWord(final Word w1, final Word w2) {
+        if (w1.getProgress() != w2.getProgress() ) {
+            return w1.getProgress() < w2.getProgress() ? 1 : -1;
+        }
+
+        if (w1.getCorrectAnswers() == w2.getCorrectAnswers() || w1.getCorrectAnswers() == 0) {
+            return w1.getIncorrectAnswers() < w2.getIncorrectAnswers() ? 1 : -1;
+        }
+
+        return w1.getCorrectAnswers() > w2.getCorrectAnswers() ? 1 : -1;
     }
 
     private void setRadioVisibility(final boolean visibility) {

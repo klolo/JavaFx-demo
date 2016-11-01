@@ -24,6 +24,7 @@ import java.util.Random;
 
 
 public class LearnModel extends BaseController {
+
     @FXML
     public BorderPane root;
 

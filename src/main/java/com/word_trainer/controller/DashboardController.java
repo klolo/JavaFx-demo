@@ -78,12 +78,11 @@ public class DashboardController extends DashboardModel {
             isDone = true;
         }
 
-        String messageKey = isDone ? "dashboard.add.ok" : "dashboard.add.error";
+        final String messageKey = isDone ? "dashboard.add.ok" : "dashboard.add.error";
         Notifications.create()
                 .title(getMessageForKey("dashboard.add.title"))
                 .text(getMessageForKey(messageKey))
                 .showWarning();
-
     }
 
     public void startLearning() throws IOException {
